@@ -10,7 +10,7 @@ class ScoreDisplay extends StatelessWidget {   //page that displays score to use
   final ScoreReport scoreReport;
 
   Widget _buildSubScorePanel ()  {
-    TextStyle _titleTextStyle = TextStyle(color: Colors.black, fontSize: 18);
+    TextStyle _titleTextStyle = TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold);
     TextStyle _subScoreTextStyle = TextStyle(color: Colors.black, fontSize: 14);
 
     return  (
@@ -21,6 +21,14 @@ class ScoreDisplay extends StatelessWidget {   //page that displays score to use
           "Sub-Scores",
           style: _titleTextStyle,
 
+        ),
+        Container(
+          child: Divider(
+          color: Colors.black,
+          height: 4,
+        ),
+          width: 120,
+          height: 8,
         ),
         Text(
           "Temperature - " + scoreReport.tempScore.toString(),
@@ -62,7 +70,12 @@ class ScoreDisplay extends StatelessWidget {   //page that displays score to use
         key: _chartKey,
         size: const Size(300.0, 300.0),
         initialChartData: data,
-        chartType: CircularChartType.Pie,
+        chartType: CircularChartType.Radial,
+        holeLabel: scoreReport.finalScore.toString() + "/10",
+        labelStyle: TextStyle(
+          fontSize: 34,
+          color: Colors.black,
+        ),
       );
 
     }
@@ -78,11 +91,7 @@ class ScoreDisplay extends StatelessWidget {   //page that displays score to use
     Column(
       children: <Widget>[
         Text(
-          "Score",
-          style: TextStyle(fontSize: 40),
-        ),
-        Text(
-          scoreReport.finalScore.toString(),
+          "Quality Score",
           style: TextStyle(fontSize: 40),
         ),
         _buildChartDisplay(),
